@@ -1,43 +1,31 @@
-# Getting started developing for OP Mainnet
+# Getting started developing for BL Mainnet
+[![Twitter Follow](https://img.shields.io/twitter/follow/optimismPBC.svg?label=optimismPBC&style=social)](https://twitter.com/SafeBlastArmy)
 
-[![Discord](https://img.shields.io/discord/667044843901681675.svg?color=768AD4&label=discord&logo=https%3A%2F%2Fdiscordapp.com%2Fassets%2F8c9701b98ad4372b58f13fd9f65f966e.svg)](https://discord-gateway.optimism.io)
-[![Twitter Follow](https://img.shields.io/twitter/follow/optimismPBC.svg?label=optimismPBC&style=social)](https://twitter.com/optimismPBC)
-
-This tutorial teaches you the basics of OP Mainnet development.
-OP Mainnet is [EVM equivalent](https://medium.com/ethereum-optimism/introducing-evm-equivalence-5c2021deb306), meaning we run a slightly modified version of the same `geth` you run on mainnet.
-Therefore, the differences between OP Mainnet development and Ethereum development are minor.
+This tutorial teaches you the basics of BL Mainnet development.
+BL Mainnet is [EVM equivalent](https://medium.com/ethereum-optimism/introducing-evm-equivalence-5c2021deb306), meaning we run a slightly modified version of the same `geth` you run on mainnet.
+Therefore, the differences between BL Mainnet development and Ethereum development are minor.
 But a few differences [do exist](https://community.optimism.io/docs/developers/build/differences/#).
 
-#### See video
 
-If you prefer watching tutorials rather than reading them, we have this great video covering the getting started content:
+## BL Mainnet and BL Goerli Endpoint URLs
 
-[![getting started video](https://img.youtube.com/vi/_Y6CwsYgqwI/default.jpg)](https://youtu.be/_Y6CwsYgqwI)
+To access the BL Mainnet and BL Goerli networks, you can use the following endpoint URLs directly:
 
-## OP Mainnet and OP Goerli endpoint URLs
-
-To access any Ethereum type network you need an endpoint. 
-We recommend you get one from [Alchemy, our preferred provider](https://www.alchemy.com/).
-[See here](../ecosystem/alchemy/) for step by step directions on using Alchemy.
-
-Alternatively, we have [other great providers](https://community.optimism.io/docs/useful-tools/providers/) that support our networks.
-
-
+- Mainnet: `https://rpc.blastblockchain.com`
+- Goerli Testnet: `https://testnet-rpc.blastblockchain.com`
 
 ### Network choice
 
-For development purposes we recommend you use either a local development node or [Optimism Goerli](https://goerli-explorer.optimism.io/).
+For development purposes we recommend you use either a local development node or [Blast Goerli](https://goerli-explorer.blastblockchain.com/).
 That way you don't need to spend real money.
-If you need ETH on OP Goerli for testing purposes, [you can use this faucet](https://optimismfaucet.xyz/).
+If you need ETH on BL Goerli for testing purposes, [you can use this faucet](https://blastblockchain.com).
 
+## Interacting with contracts on BL Mainnet or BL Goerli
 
-
-## Interacting with contracts on OP Mainnet or OP Goerli
-
-We have [Hardhat's Greeter contract](hardhat/contracts/Greeter.sol) on OP Goerli, at address [0x575E9B4f2c3945d7CF07cb76628d29DF471692B8](https://goerli-explorer.optimism.io/address/0x575E9B4f2c3945d7CF07cb76628d29DF471692B8). 
+We have [Hardhat's Greeter contract](hardhat/contracts/Greeter.sol) on BL Goerli, at address [0x00000000000000000000000000000000000000000](https://goerli-explorer.blastblockchain.com/address/0x00000000000000000000000000000000000000000). 
 You can verify your development stack configuration by interacting with it. 
 
-As you can see in the different development stacks below, the way you deploy contracts and interact with them on OP Mainnet or OP Goerli is almost identical to the way you do it with L1 Ethereum.
+As you can see in the different development stacks below, the way you deploy contracts and interact with them on BL Mainnet or BL Goerli is almost identical to the way you do it with L1 Ethereum.
 The most visible difference is that you have to specify a different endpoint (of course). 
 The list of other differences is [here](https://community.optimism.io/docs/developers/build/differences/).
 
@@ -53,24 +41,21 @@ The list of other differences is [here](https://community.optimism.io/docs/devel
 
 ### Hardhat
 
-In [Hardhat](https://hardhat.org/) you use a configuration similar to [this one](https://github.com/ethereum-optimism/optimism-tutorial/tree/main/getting-started/hardhat).
+In [Hardhat](https://hardhat.org/) you use a configuration similar to [this one](https://github.com/BLASTchain/blast-tutorial/tree/main/getting-started/hardhat).
 
-#### Connecting to OP Goerli
+#### Connecting to BL Goerli
 
-Follow these steps to add OP Goerli support to an existing Hardhat project (or a newly created one). 
+Follow these steps to add BL Goerli support to an existing Hardhat project (or a newly created one). 
 
 
 1. Define your network configuration in `.env`:
 
    ```sh
-   # Put the mnemonic for an account on OP Goerli here
+   # Put the mnemonic for an account on BL Goerli here
    MNEMONIC=test test test test test test test test test test test junk
 
-   # API KEY for Alchemy
-   ALCHEMY_API_KEY=
-
-   # URL to access OP Goerli (if not using Alchemy)
-   OPTIMISM_GOERLI_URL=
+   # URL to access BL Goerli
+   BLAST_GOERLI_URL=
    ```
 
 1. Add `dotenv` to your project:
@@ -90,18 +75,15 @@ Follow these steps to add OP Goerli support to an existing Hardhat project (or a
    1. Get the correct URL from the configuration:
 
       ```js
-      const optimismGoerliUrl =
-         process.env.ALCHEMY_API_KEY ?
-            `https://opt-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` :
-            process.env.OPTIMISM_GOERLI_URL
+      const blastGoerliUrl = process.env.BLAST_GOERLI_URL
       ```
 
 
    1. Add a network definition in `module.exports.networks`:
 
    ```js
-   "optimism-goerli": {
-      url: optimismGoerliUrl,
+   "blast-goerli": {
+      url: blastGoerliUrl,
       accounts: { mnemonic: process.env.MNEMONIC }
    }   
    ```
@@ -113,14 +95,14 @@ Follow these steps to add OP Goerli support to an existing Hardhat project (or a
    ```sh
    cd hardhat
    yarn
-   yarn hardhat console --network optimism-goerli
+   yarn hardhat console --network blast-goerli
    ```
 
 1. Connect to the Greeter contract:   
 
    ```js
    Greeter = await ethers.getContractFactory("Greeter")
-   greeter = await Greeter.attach("0x575E9B4f2c3945d7CF07cb76628d29DF471692B8")
+   greeter = await Greeter.attach("0x00000000000000000000000000000000000000000")
    ```   
 
 
@@ -151,24 +133,21 @@ await greeter.greet()
 
 ### Truffle
 
-In [Truffle](https://trufflesuite.com/) you use a configuration similar to [this one](https://github.com/ethereum-optimism/optimism-tutorial/tree/main/getting-started/truffle).
+In [Truffle](https://trufflesuite.com/) you use a configuration similar to [this one](https://github.com/BLASTchain/blast-tutorial/tree/main/getting-started/truffle).
 
-#### Connecting to OP Goerli
+#### Connecting to BL Goerli
 
-Follow these steps to add OP Goerli support to an existing Truffle project. 
+Follow these steps to add BL Goerli support to an existing Truffle project. 
 
 
 1. Define your network configuration in `.env`:
 
    ```sh
-   # Put the mnemonic for an account on OP Goerli here
+   # Put the mnemonic for an account on BL Goerli here
    MNEMONIC=test test test test test test test test test test test junk
 
-   # API KEY for Alchemy
-   ALCHEMY_API_KEY=
-
-   # URL to access OP Goerli (if not using Alchemy)
-   OPTIMISM_GOERLI_URL=
+   # URL to access BL Goerli
+   BLAST_GOERLI_URL=
    ```
 
 1. Add `dotenv` and `@truffle/hdwallet-provider` to your project:
@@ -195,20 +174,17 @@ Follow these steps to add OP Goerli support to an existing Truffle project.
    1. Get the correct URL:
 
       ```js
-      const optimismGoerliUrl =
-         process.env.ALCHEMY_API_KEY ?
-            `https://opt-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` :
-            process.env.OPTIMISM_GOERLI_URL
+      const blastGoerliUrl = process.env.BLAST_GOERLI_URL
       ```
 
    1. Add a network definition in `module.exports.networks`:
 
       ```js
-      "optimism-goerli": {
+      "blast-goerli": {
          provider: () => new HDWalletProvider(
             process.env.MNEMONIC,
-            optimismGoerliUrl),
-         network_id: 420
+            blastGoerliUrl),
+         network_id: 239
       }
       ```
 
@@ -267,19 +243,16 @@ await greeter.greet()
 ```
 
 
-
-
-
 ### Remix
 
-#### Connecting to OP Goerli
+#### Connecting to BL Goerli
 
-In [Remix](https://remix.ethereum.org) you access OP Goerli (or OP Mainnet) through your own wallet.
+In [Remix](https://remix.ethereum.org) you access BL Goerli (or BL Mainnet) through your own wallet.
 
-1. Add OP Goerli to your wallet. 
+1. Add BL Goerli to your wallet. 
    The easiest way to do this is to use [chainid.link](https://chainid.link/?network=optimism-goerli).
 
-1. Log on with your wallet to OP Goerli.
+1. Log on with your wallet to BL Goerli.
 
 1. Browse to [Remix](https://remix.ethereum.org/).
 1. Click the run icon (<img src="assets/remix-run-icon.png" height="24" valign="top" />).
@@ -386,18 +359,18 @@ forge create --mnemonic-path ./mnem.delme Greeter \
 ```
 
 
-#### Using the Optimism contract library
+#### Using the Blast contract library
 
-This library is provided as an [npm package](https://www.npmjs.com/package/@eth-optimism/contracts), which is different from what forge expects.
+This library is provided as an [npm package](https://www.npmjs.com/package/@eth-blast/contracts), which is different from what forge expects.
 Here is how you can import it without importing the entire OP-Stack monorepo:
 
 1. Install the JavaScript tools if you don't already have them: [Node.js](https://nodejs.org/en/download/) and [yarn](https://classic.yarnpkg.com/lang/en/).
 
-1. Install the `@eth-optimism/contracts` library under `lib`.
+1. Install the `@eth-blast/contracts` library under `lib`.
 
    ```sh
    cd lib
-   yarn add @eth-optimism/contracts
+   yarn add @eth-blast/contracts
    ```
 
 1. If you are using `git`, add `node_modules` to [`.gitignore`](https://git-scm.com/docs/gitignore).
@@ -406,10 +379,10 @@ Here is how you can import it without importing the entire OP-Stack monorepo:
    To ensure source code compatibility, create a file (in the application's root directory) called `remappings.txt` with this content:
  
    ```
-   @eth-optimism/=lib/node_modules/@eth-optimism/
+   @eth-blast/=lib/node_modules/@eth-blast/
    ```
 
-You can now run `forge build` with contracts that use the Optimism contract library.
+You can now run `forge build` with contracts that use the Blast contract library.
 
 
 ### Brownie
@@ -423,7 +396,7 @@ If you want to develop in Python, you can use the [Brownie](https://eth-brownie.
 1. Specify your mnemonic in `.env`:
 
    ```sh
-   # Put the mnemonic for an account on OP Goerli here
+   # Put the mnemonic for an account on BL Goerli here
    MNEMONIC=test test test test test test test test test test test junk
    ```
 
@@ -434,18 +407,18 @@ If you want to develop in Python, you can use the [Brownie](https://eth-brownie.
    pip3 install dotenv
    ```
 
-1. Update the `optimism-test` network.
+1. Update the `blast-test` network.
 
    ```sh
-   brownie networks modify optimism-test chainid=420 \
-      explorer=goerli-optimism.etherscan.io \
-      host= << OP Goerli URL >>
+   brownie networks modify blast-test chainid=239 \
+      explorer=goerli-explorer.blastblockchain.com \
+      host= << BL Goerli URL >>
    ```
 
 1. Start the console.
 
    ```sh
-   brownie console --network optimism-test
+   brownie console --network blast-test
    ```
 
    Note that the default color scheme assumes a dark background. 
@@ -500,113 +473,20 @@ Use this command:
 Greeter.deploy("Hello", {'from': accounts[0]})
 ```
 
-
-
-### Apeworx
-
-
-#### Connect to OP Goerli
-
-1. Install [Apeworx](https://www.apeworx.io/) and create a new project.
-
-   ```sh
-   pip3 install eth-ape
-   ape init
-   <type project name>
-   ```
-
-1. Install plugins.
-   In this tutorial we use Solidity, but Vyper is also supported by Apeworx.
-
-   ```sh
-   ape plugins install optimism solidity
-   ```
-
-1. Import your account.
-   Type this command, followed by your mnemonic (the 12 word phrase) and a pass phrase to protect it.
-
-   ```sh
-   ape accounts import test --use-mnemonic
-   ```
-
-1. Create an [Alchemy](https://dashboard.alchemy.com/) account and create an **Optimistic Goerli** app.
-   [See here for detailed directions](https://github.com/ethereum-optimism/optimism-tutorial/tree/main/ecosystem/alchemy).
-
-1. Edit the configuration file, `ape-config.yaml`:
-
-   ```yaml
-   name: greeter
-
-   default_ecosystem: optimism
-
-   geth:
-     optimism:
-       goerli:
-         uri: https://goerli.optimism.io
-         # Normally the uri would be:
-         # https://opt-goerli.g.alchemy.com/v2/<key>
-   ```
-
-#### Greeter interaction
-
-
-1. Start the console:
-
-   ```sh
-   ape console --network optimism:goerli
-   ```
-
-1. Connect to the Greeter contract:   
-
-   ```python
-   greeter = project.get_contract("Greeter").at("0x575E9B4f2c3945d7CF07cb76628d29DF471692B8")
-   ```   
-
-1. Read information from the contract:
-
-   ```python
-   greeter.greet()
-   ```
-
-1. Submit a transaction.
-
-   ```python
-   acct = accounts.load("test")
-   greeter.setGreeting("Apeworx says hi ("+acct.address+")", sender=acct)  
-   ```
-
-   Sign the transaction and provide the passphrase if necessary.
-   Ignore error messages if you get them.
-
-1. Verify the greeting changed.
-
-   ```python
-   greeter.greet()
-   ```
-
-#### Deploying a contract
-
-To deploy a contract from the Apeworx console:
-
-```
-project.get_contract("Greeter").deploy("Hello", sender=acct)
-```
-
-
 ## Best practices
 
 It is best to start development with the EVM provided by the development stack. 
 Not only is it faster, but such EVMs often have extra features, such as the [ability to log messages from Solidity](https://hardhat.org/tutorial/debugging-with-hardhat-network.html) or a [graphical user interface](https://trufflesuite.com/ganache/).
 
 After you are done with that development, debug your decentralized application using either a [development node](https://community.optimism.io/docs/developers/build/dev-node/) or the [Goerli test network](https://community.optimism.io/docs/useful-tools/networks/). 
-This lets you debug parts that are OP Mainnet specific such as calls to bridges to transfer assets between layers.
+This lets you debug parts that are BL Mainnet specific such as calls to bridges to transfer assets between layers.
 
 Only when you have a version that works well on a test network should you deploy to the production network, where every transaction has a cost.
 
 ### Contract source verification
 
-You don't have to upload your source code to [block explorers](https://community.optimism.io/docs/useful-tools/explorers/), but it is a good idea. 
+You don't have to upload your source code to [block explorers](https://blastblockchain.com/), but it is a good idea. 
 On the test network it lets you issue queries and transactions from the explorer's user interface.
 On the production network it lets users know exactly what your contract does, which is conducive to trust.
 
-Just remember, if you use [the Etherscan API](https://explorer.optimism.io/apis), you need one API key for OP Mainnet and a separate one for OP Goerli.
+Just remember, if you use [the Blast Explorer API](https://blastblockchain.com/api-docs), you need one API key for BL Mainnet and a separate one for BL Goerli.
