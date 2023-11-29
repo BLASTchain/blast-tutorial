@@ -1,14 +1,12 @@
-# Bridging ERC-20 tokens with the Optimism SDK
-
-[![Discord](https://img.shields.io/discord/667044843901681675.svg?color=768AD4&label=discord&logo=https%3A%2F%2Fdiscordapp.com%2Fassets%2F8c9701b98ad4372b58f13fd9f65f966e.svg)](https://discord-gateway.optimism.io)
+# Bridging ERC-20 tokens with the Blast SDK
 [![Twitter Follow](https://img.shields.io/twitter/follow/optimismFND.svg?label=optimismFND&style=social)](https://twitter.com/optimismFND)
 
-This tutorial teaches you how to use the [Optimism SDK](https://sdk.optimism.io/) to transfer ERC-20 tokens between Layer 1 (Ethereum or Goerli) and Layer 2 (OP Mainnet or OP Goerli).
+This tutorial teaches you how to use the [Blast SDK](https://www.npmjs.com/package/@eth-blast/sdk) to transfer ERC-20 tokens between Layer 1 (Ethereum or Goerli) and Layer 2 (BL Mainnet or BL Goerli).
 While you *could* use [the bridge contracts](https://community.optimism.io/docs/developers/bridge/standard-bridge/) directly, a [simple usage error](https://community.optimism.io/docs/developers/bridge/standard-bridge/#depositing-erc20s) can cause you to lock tokens in the bridge forever and lose their value. 
 The SDK provides transparent safety rails to prevent that mistake.
 
-The SDK supports multiple OP Chains: OP, Base, etc.
-To see whether a specific OP Chain is supported directly, [see the documentation](https://sdk.optimism.io/enums/l2chainid).
+The SDK supports multiple BL Chains: BL, Base, etc.
+To see whether a specific BL Chain is supported directly, [see the documentation](https://sdk.optimism.io/enums/l2chainid).
 Chains that aren't officially supported just take a few extra steps.
 Get the L1 contract addresses, and [provide them to the SDK](https://stack.optimism.io/docs/build/sdk/#contract-addresses).
 Once you do that, you can use the SDK normally.
@@ -28,8 +26,8 @@ Once you do that, you can use the SDK normally.
 1. Clone this repository and enter it.
 
    ```sh
-   git clone https://github.com/ethereum-optimism/optimism-tutorial.git
-   cd optimism-tutorial/cross-dom-bridge-erc20
+   git clone https://github.com/BLASTchain/blast-tutorial
+   cd blast-tutorial/cross-dom-bridge-erc20
    ```
 
 1. Install the necessary packages.
@@ -38,20 +36,18 @@ Once you do that, you can use the SDK normally.
    yarn
    ```
 
-1. Go to [Alchemy](https://www.alchemy.com/) and create two applications:
+1. Go to [Alchemy](https://www.alchemy.com/) and create applications:
 
    - An application on Goerli
-   - An application on OP Goerli
 
-   Keep a copy of the two keys.
+   Keep a copy of the keys.
 
 1. Copy `.env.example` to `.env` and edit it:
 
-   1. Set `MNEMONIC` to point to an account that has ETH on the Goerli test network and the OP Goerli test network.
+   1. Set `MNEMONIC` to point to an account that has ETH on the Goerli test network and the BL Goerli test network.
    1. Set `GOERLI_ALCHEMY_KEY` to the key for the Goerli app.
-   1. Set `OP_GOERLI_ALCHEMY_KEY` to the key for the Optimistic Goerli app
 
-   [This faucet gives ETH on the Goerli network](https://faucet.paradigm.xyz/). [This faucet gives ETH on the OP Goerli network](https://optimismfaucet.xyz/).
+   [This faucet gives ETH on the Goerli network](https://faucet.paradigm.xyz/).
 
 
 ## Run the sample code
@@ -85,7 +81,7 @@ depositERC20 took 179.776 seconds
 Withdraw ERC20
 OUTb on L1:999     OUTb on L2:1
 Transaction hash (on L2): 0x30758c4550035687ef13f4b1211fac9683847a9b1fab5902f6d4caf8642c4973
-	For more information: https://goerli-optimism.etherscan.io/tx/0x30758c4550035687ef13f4b1211fac9683847a9b1fab5902f6d4caf8642c4973
+	For more information: https://goerli-explorer.blastblockchain.com/tx/0x30758c4550035687ef13f4b1211fac9683847a9b1fab5902f6d4caf8642c4973
 Waiting for status to be READY_TO_PROVE
 Time so far 8.223 seconds
 Time so far 313.661 seconds
@@ -109,20 +105,20 @@ It could be longer.
 ```js
 #! /usr/local/bin/node
 
-// Transfers between L1 and L2 using the Optimism SDK
+// Transfers between L1 and L2 using the Blast SDK
 
 const ethers = require("ethers")
-const optimismSDK = require("@eth-optimism/sdk")
+const blastSDK = require("@eth-blast/sdk")
 require('dotenv').config()
 
 ```
 
-The libraries we need: [`ethers`](https://docs.ethers.io/v5/), [`dotenv`](https://www.npmjs.com/package/dotenv) and the Optimism SDK itself.
+The libraries we need: [`ethers`](https://docs.ethers.io/v5/), [`dotenv`](https://www.npmjs.com/package/dotenv) and the Blast SDK itself.
 
 ```js
 const mnemonic = process.env.MNEMONIC
 const l1Url = `https://eth-goerli.g.alchemy.com/v2/${process.env.GOERLI_KEY}`
-const l2Url = `https://opt-goerli.g.alchemy.com/v2/${process.env.OP_GOERLI_KEY}`
+const l2Url = `https://testnet-rpc.blastblockchain.com`
 ```
 
 Configuration, read from `.env`.
@@ -227,15 +223,15 @@ const setup = async() => {
 Get the signers we need, and our address.
 
 ```js
-  crossChainMessenger = new optimismSDK.CrossChainMessenger({
+  crossChainMessenger = new blastSDK.CrossChainMessenger({
       l1ChainId: 5,    // Goerli value, 1 for mainnet
-      l2ChainId: 420,  // OP Goerli value, 10 for mainnet
+      l2ChainId: 239,  // BL Goerli value, 238 for mainnet
       l1SignerOrProvider: l1Signer,
       l2SignerOrProvider: l2Signer,
   })
 ```
 
-Create the [`CrossChainMessenger`](https://sdk.optimism.io/classes/crosschainmessenger) object that we use to transfer assets.
+Create the [`CrossChainMessenger`](https://www.npmjs.com/package/@eth-blast/) object that we use to transfer assets.
 
 
 ```js
@@ -284,7 +280,7 @@ Otherwise, call `l1ERC20.faucet()` to get the user `OUTb` tokens to deposit and 
 
 ### `depositERC20`
 
-This function shows how to deposit an ERC-20 token from Ethereum to OP Mainnet (or from Goerli to OP Goerli).
+This function shows how to deposit an ERC-20 token from Ethereum to BL Mainnet (or from Goerli to BL Goerli).
 
 ```js
 const oneToken = 1000000000000000000n
@@ -328,7 +324,7 @@ Wait until the allowance transaction is processed and then report the time it to
     erc20Addrs.l1Addr, erc20Addrs.l2Addr, oneToken)
 ```
 
-[`crossChainMessenger.depositERC20()`](https://sdk.optimism.io/classes/crosschainmessenger#depositERC20-2) creates and sends the deposit trasaction on L1.
+[`crossChainMessenger.depositERC20()`](https://www.npmjs.com/package/@eth-blast/sdk) creates and sends the deposit trasaction on L1.
 
 ```js
   console.log(`Deposit transaction hash (on L1): ${response.hash}`)
@@ -342,13 +338,13 @@ Of course, it takes time for the transaction to actually be processed on L1.
   console.log("Waiting for status to change to RELAYED")
   console.log(`Time so far ${(new Date()-start)/1000} seconds`)
   await crossChainMessenger.waitForMessageStatus(response.hash,
-                                                  optimismSDK.MessageStatus.RELAYED)
+                                                  blastSDK.MessageStatus.RELAYED)
 ```
 
 After the transaction is processed on L1 it needs to be picked up by an offchain service and relayed to L2. 
 To show that the deposit actually happened we need to wait until the message is relayed. 
-The [`waitForMessageStatus`](https://sdk.optimism.io/classes/crosschainmessenger#waitForMessageStatus) function does this for us.
-[Here are the statuses we can specify](https://sdk.optimism.io/enums/messagestatus).
+The [`waitForMessageStatus`](https://www.npmjs.com/package/@eth-blast/sdk) function does this for us.
+[Here are the statuses we can specify](https://www.npmjs.com/package/@eth-blast/sdk).
 
 The third parameter (which is optional) is a hashed array of options:
 - `pollIntervalMs`: The poll interval
@@ -360,19 +356,19 @@ The third parameter (which is optional) is a hashed array of options:
 }     // depositERC20()
 ```
 
-Once the message is relayed the balance change on OP Mainnet (or OP Goerli) is practically instantaneous.
+Once the message is relayed the balance change on BL Mainnet (or BL Goerli) is practically instantaneous.
 We can just report the balances and see that the L2 balance rose by 1 gwei.
 
 ### `withdrawERC20`
 
-This function shows how to withdraw ERC-20 from OP Mainnet to Ethereum (or OP Goerli to Goerli).
+This function shows how to withdraw ERC-20 from BL Mainnet to Ethereum (or BL Goerli to Goerli).
 The withdrawal process has these stages:
 
-1. Submit the withdrawal transaction on OP Mainnet (or OP Goerli).
-1. Wait until the state root with the withdrawal is published (and the status changes to `optimismSDK.MessageStatus.READY_TO_PROVE`).
+1. Submit the withdrawal transaction on BL Mainnet (or BL Goerli).
+1. Wait until the state root with the withdrawal is published (and the status changes to `blastSDK.MessageStatus.READY_TO_PROVE`).
 1. Submit the proof on L1 using `crossChainMessenger.proveMessage()`.
 1. Wait the fault challenge period. 
-   When this period is over, the status becomes `optimismSDK.MessageStatus.READY_FOR_RELAY`
+   When this period is over, the status becomes `blastSDK.MessageStatus.READY_FOR_RELAY`
 1. Finalize to cause the actual withdrawal on L1 using `crossChainMessenger.finalizeMessage()`.
 
 [You can read more about this in the documentation](https://community.optimism.io/docs/developers/bedrock/how-is-bedrock-different/#two-phase-withdrawals).
@@ -391,17 +387,17 @@ We want users to see their balances, and how long the withdrawal is taking.
   const response = await crossChainMessenger.withdrawERC20(
     erc20Addrs.l1Addr, erc20Addrs.l2Addr, oneToken)
   console.log(`Transaction hash (on L2): ${response.hash}`)
-  console.log(`\tFor more information: https://goerli-optimism.etherscan.io/tx/${response.hash}`)
+  console.log(`\tFor more information: https://goerli-explorer.blastblockchain.com/tx/${response.hash}`)
   await response.wait()
 ```
 
-This is the initial withdrawal transaction on OP Goerli (it would look the same on OP Mainnet).
+This is the initial withdrawal transaction on BL Goerli (it would look the same on BL Mainnet).
 
 ```js
   console.log("Waiting for status to be READY_TO_PROVE")
   console.log(`Time so far ${(new Date()-start)/1000} seconds`)
   await crossChainMessenger.waitForMessageStatus(response.hash, 
-    optimismSDK.MessageStatus.READY_TO_PROVE)
+    blastSDK.MessageStatus.READY_TO_PROVE)
 ```
 
 The Merkle proof has to be submitted after the state root is written on L1.
@@ -419,7 +415,7 @@ Submit the Merkle proof, starting the challenge period.
   console.log("In the challenge period, waiting for status READY_FOR_RELAY") 
   console.log(`Time so far ${(new Date()-start)/1000} seconds`)  
   await crossChainMessenger.waitForMessageStatus(response.hash, 
-                                                optimismSDK.MessageStatus.READY_FOR_RELAY)
+                                                blastSDK.MessageStatus.READY_FOR_RELAY)
 ```
 
 Wait the challenge period.
@@ -438,13 +434,13 @@ Finalize the withdrawal and actually get back the token.
   console.log("Waiting for status to change to RELAYED")
   console.log(`Time so far ${(new Date()-start)/1000} seconds`)  
   await crossChainMessenger.waitForMessageStatus(response, 
-    optimismSDK.MessageStatus.RELAYED)
+    blastSDK.MessageStatus.RELAYED)
   await reportERC20Balances()   
   console.log(`withdrawERC20 took ${(new Date()-start)/1000} seconds\n\n\n`)  
 }     // withdrawERC20()
 ```
 
-Wait for the message status to change to `optimismSDK.MessageStatus.RELAYED`, at which time the tokens are finally withdrawn.
+Wait for the message status to change to `blastSDK.MessageStatus.RELAYED`, at which time the tokens are finally withdrawn.
 
 ### `main`
 

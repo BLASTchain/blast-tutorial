@@ -3,7 +3,7 @@
 // ERC-20 transfers between L1 and L2 using the Optimism SDK
 
 const ethers = require("ethers")
-const optimismSDK = require("@eth-optimism/sdk")
+const optimismSDK = require("@eth-blast/sdk")
 require('dotenv').config()
 
 
@@ -17,10 +17,10 @@ if (!validLength.includes(words)) {
 }
 
 const l1Url = `https://eth-goerli.g.alchemy.com/v2/${process.env.GOERLI_ALCHEMY_KEY}`
-const l2Url = `https://opt-goerli.g.alchemy.com/v2/${process.env.OP_GOERLI_ALCHEMY_KEY}`
+const l2Url = `https://testnet-rpc.blastblockchain.com`
 
 
-// Contract addresses for OPTb tokens, taken
+// Contract addresses for BLTb tokens, taken
 // from https://github.com/ethereum-optimism/ethereum-optimism.github.io/blob/master/data/OUTb/data.json
 const erc20Addrs = {
   l1Addr: "0x32B3b2281717dA83463414af4E8CfB1970E56287",
