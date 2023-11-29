@@ -1,5 +1,5 @@
 # Bridging ERC-20 tokens with the Blast SDK
-[![Twitter Follow](https://img.shields.io/twitter/follow/optimismFND.svg?label=optimismFND&style=social)](https://twitter.com/optimismFND)
+[![Twitter Follow](https://img.shields.io/twitter/follow/SafeBlastArmy.svg?label=SafeBlastArmy&style=social)](https://twitter.com/SafeBlastArmy)
 
 This tutorial teaches you how to use the [Blast SDK](https://www.npmjs.com/package/@eth-blast/sdk) to transfer ERC-20 tokens between Layer 1 (Ethereum or Goerli) and Layer 2 (BL Mainnet or BL Goerli).
 While you *could* use [the bridge contracts](https://community.optimism.io/docs/developers/bridge/standard-bridge/) directly, a [simple usage error](https://community.optimism.io/docs/developers/bridge/standard-bridge/#depositing-erc20s) can cause you to lock tokens in the bridge forever and lose their value. 
