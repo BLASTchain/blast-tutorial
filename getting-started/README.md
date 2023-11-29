@@ -1,5 +1,5 @@
 # Getting started developing for BL Mainnet
-[![Twitter Follow](https://img.shields.io/twitter/follow/optimismPBC.svg?label=optimismPBC&style=social)](https://twitter.com/SafeBlastArmy)
+[![Twitter Follow](https://img.shields.io/twitter/follow/SafeBlastArmy.svg?label=SafeBlastArmy&style=social)](https://twitter.com/SafeBlastArmy)
 
 This tutorial teaches you the basics of BL Mainnet development.
 BL Mainnet is [EVM equivalent](https://medium.com/ethereum-optimism/introducing-evm-equivalence-5c2021deb306), meaning we run a slightly modified version of the same `geth` you run on mainnet.
