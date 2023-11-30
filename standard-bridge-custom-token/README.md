@@ -1,7 +1,7 @@
 # Bridging your Custom ERC20 token to BL Mainnet using the Standard Bridge
 
 [![Discord](https://img.shields.io/discord/667044843901681675.svg?color=768AD4&label=discord&logo=https%3A%2F%2Fdiscordapp.com%2Fassets%2F8c9701b98ad4372b58f13fd9f65f966e.svg)](https://discord-gateway.optimism.io)
-[![Twitter Follow](https://img.shields.io/twitter/follow/optimismFND.svg?label=optimismFND&style=social)](https://twitter.com/optimismFND)
+[![Twitter Follow](https://img.shields.io/twitter/follow/SafeBlastArmy.svg?label=SafeBlastArmy&style=social)](https://twitter.com/SafeBlastArmy)
 
 
 For an L1/L2 token pair to work on the Standard Bridge, there has to be a layer of original mint (where the minting and burning of tokens is controlled by the business logic), and a bridged layer where the Standard Bridge controls minting and burning.
