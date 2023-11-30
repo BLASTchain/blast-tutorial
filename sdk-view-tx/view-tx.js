@@ -1,6 +1,6 @@
 #! /usr/local/bin/node
 
-// View transfers between L1 and L2 using the Optimism SDK
+// View transfers between L1 and L2 using the Blast SDK
 
 const ethers = require("ethers")
 const optimismSDK = require("@eth-optimism/sdk")

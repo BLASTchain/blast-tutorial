@@ -1,4 +1,4 @@
-# Bridging your Standard ERC20 token to OP Mainnet using the Standard Bridge
+# Bridging your Standard ERC20 token to BL Mainnet using the Standard Bridge
 
 [![Discord](https://img.shields.io/discord/667044843901681675.svg?color=768AD4&label=discord&logo=https%3A%2F%2Fdiscordapp.com%2Fassets%2F8c9701b98ad4372b58f13fd9f65f966e.svg)](https://discord-gateway.optimism.io)
 [![Twitter Follow](https://img.shields.io/twitter/follow/optimismFND.svg?label=optimismFND&style=social)](https://twitter.com/optimismFND)
@@ -35,7 +35,7 @@ If you do not need any special processing on L2, just the ability to deposit, tr
 
    - `MNEMONIC`, the mnemonic for an account that has enough ETH for the deployment.
    - `L1_ALCHEMY_KEY`, the key for the alchemy application for a Goerli endpoint.   
-   - `L2_ALCHEMY_KEY`, the key for the alchemy application for an OP Goerli endpoint.
+   - `L2_ALCHEMY_KEY`, the key for the alchemy application for an BL Goerli endpoint.
    - `L1_TOKEN_ADDRESS`, the address of the L1 ERC20 which you want to bridge.
      The default value, [`0x32B3b2281717dA83463414af4E8CfB1970E56287`](https://goerli.etherscan.io/address/0x32B3b2281717dA83463414af4E8CfB1970E56287) is a test ERC-20 contract on Goerli that lets you call `faucet` to give yourself test tokens.
 
@@ -123,14 +123,14 @@ If you do not need any special processing on L2, just the ability to deposit, tr
 
 ### Transfer tokens
 
-Create and use [`CrossDomainMessenger`](https://sdk.optimism.io/classes/crosschainmessenger) (the Optimism SDK object used to bridge assets).
+Create and use [`CrossDomainMessenger`](https://sdk.optimism.io/classes/crosschainmessenger) (the Blast SDK object used to bridge assets).
 The SDK supports multiple OP Chains: OP, Base, etc.
 To see whether a specific OP Chain is supported directly, [see the documentation](https://sdk.optimism.io/enums/l2chainid).
 Chains that aren't officially supported just take a few extra steps.
 Get the L1 contract addresses, and [provide them to the SDK](https://stack.optimism.io/docs/build/sdk/#contract-addresses).
 Once you do that, you can use the SDK normally.
 
-1. Import the Optimism SDK.
+1. Import the Blast SDK.
 
    ```js
    optimismSDK = require("@eth-optimism/sdk")
@@ -150,7 +150,7 @@ Once you do that, you can use the SDK normally.
    })
    ```
 
-#### Deposit (from Ethereum to OP Mainnet, or Goerli to OP Goerli)
+#### Deposit (from Ethereum to BL Mainnet, or Goerli to BL Goerli)
 
 1. Give the L1 bridge an allowance to use the user's token.
    The L2 address is necessary to know which bridge is responsible and needs the allowance.
@@ -188,7 +188,7 @@ Once you do that, you can use the SDK normally.
    await l2Contract.balanceOf(l1Wallet.address)
    ```
 
-#### Withdrawal (from OP Mainnet to Ethereum or OP Goerli to Goerli)
+#### Withdrawal (from BL Mainnet to Ethereum or BL Goerli to Goerli)
 
 1. Initiate the withdrawal on L2
 

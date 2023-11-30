@@ -7,13 +7,13 @@ The [AttestationStation smart contract](https://github.com/ethereum-optimism/opt
 For more context on the AttestationStation visit the [overview in our developer documentation](https://community.optimism.io/docs/identity/).
 In this tutorial you learn how to read, interpret, and write those attestations.
 
-The contract we'll be using is on the OP Goerli network, at address [`0xEE36eaaD94d1Cc1d0eccaDb55C38bFfB6Be06C77`](https://goerli-explorer.optimism.io/address/0xEE36eaaD94d1Cc1d0eccaDb55C38bFfB6Be06C77).
-On OP Mainnet the contract is [at the same address](https://explorer.optimism.io/address/0xEE36eaaD94d1Cc1d0eccaDb55C38bFfB6Be06C77)
+The contract we'll be using is on the BL Goerli network, at address [`0xEE36eaaD94d1Cc1d0eccaDb55C38bFfB6Be06C77`](https://goerli-explorer.optimism.io/address/0xEE36eaaD94d1Cc1d0eccaDb55C38bFfB6Be06C77).
+On BL Mainnet the contract is [at the same address](https://explorer.optimism.io/address/0xEE36eaaD94d1Cc1d0eccaDb55C38bFfB6Be06C77)
 
 ## Prerequisites
 
 - You have [Node.js](https://nodejs.org/en/) running on your computer, as well as [yarn](https://classic.yarnpkg.com/lang/en/).
-- There is network connectivity to a provider on the OP Goerli network, and to the npm package registry.
+- There is network connectivity to a provider on the BL Goerli network, and to the npm package registry.
 
 
 ## Setup
@@ -29,9 +29,9 @@ On OP Mainnet the contract is [at the same address](https://explorer.optimism.io
 
    - `MNEMONIC` is the mnemonic to an account that has enough ETH to pay for the transaction.
 
-   - `ALCHEMY_API_KEY` is the API key for an OP Goerli app on [Alchemy](https://www.alchemy.com/), our preferred provider.
+   - `ALCHEMY_API_KEY` is the API key for an BL Goerli app on [Alchemy](https://www.alchemy.com/), our preferred provider.
 
-   - `OPTIMISM_GOERLI_URL` is the URL for OP Goerli, if you use [a different node provider](https://community.optimism.io/docs/useful-tools/providers/).
+   - `OPTIMISM_GOERLI_URL` is the URL for BL Goerli, if you use [a different node provider](https://community.optimism.io/docs/useful-tools/providers/).
 
 
 1. Enter the hardhat console:
@@ -41,8 +41,8 @@ On OP Mainnet the contract is [at the same address](https://explorer.optimism.io
    ```
 
 
-1. Attach to the contract on OP Goerli.
-   Note that `0xEE36eaaD94d1Cc1d0eccaDb55C38bFfB6Be06C77` is also the address on OP Mainnet.
+1. Attach to the contract on BL Goerli.
+   Note that `0xEE36eaaD94d1Cc1d0eccaDb55C38bFfB6Be06C77` is also the address on BL Mainnet.
 
    ```js
    AttestationStation = await ethers.getContractFactory("AttestationStation")
@@ -174,7 +174,7 @@ To read an attestation you need to know three things:
 If you want to read all the attestations about a specific address, you need to look at the emitted `AttestationCreated` events.
 
 You can do it using [MSilb7's adapter for Flipside Crypto](https://github.com/MSilb7/op_attestationstation_data).
-You can also do it using any OP Mainnet node using JavaScript (see below):
+You can also do it using any BL Mainnet node using JavaScript (see below):
 
 1. Create a filter.
    You can filter based on any combination of:
@@ -310,7 +310,7 @@ Follow these steps on the console.
    attestationProxy.address
    ```
 
-1. View the [attestation station contract on OP Goerli](https://goerli-optimism.etherscan.io/address/0xEE36eaaD94d1Cc1d0eccaDb55C38bFfB6Be06C77#internaltx) to see the new attestation.
+1. View the [attestation station contract on BL Goerli](https://goerli-optimism.etherscan.io/address/0xEE36eaaD94d1Cc1d0eccaDb55C38bFfB6Be06C77#internaltx) to see the new attestation.
    Note that it is an *internal* transaction, because `AttestationStation` is called by a contract, `AttestationProxy`, rather than directly.
    Every transaction appears twice because `0xEE36eaaD94d1Cc1d0eccaDb55C38bFfB6Be06C77` is not the "real" AttestationStation contract, it is a proxy to enable upgrades.
 
@@ -345,6 +345,6 @@ Follow these steps on the console.
    rcpt = await tx.wait()
    ```   
 
-1. Go back to [attestation station contract on OP Goerli](https://goerli-optimism.etherscan.io/address/0xEE36eaaD94d1Cc1d0eccaDb55C38bFfB6Be06C77#internaltx) to see the new attestation.
+1. Go back to [attestation station contract on BL Goerli](https://goerli-optimism.etherscan.io/address/0xEE36eaaD94d1Cc1d0eccaDb55C38bFfB6Be06C77#internaltx) to see the new attestation.
    Note that it is still the same creator address, because that is the proxy.
   

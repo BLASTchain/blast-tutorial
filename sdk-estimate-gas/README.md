@@ -1,10 +1,10 @@
-# Estimate the costs of an OP Mainnet (L2) transaction
+# Estimate the costs of an BL Mainnet (L2) transaction
 
 [![Discord](https://img.shields.io/discord/667044843901681675.svg?color=768AD4&label=discord&logo=https%3A%2F%2Fdiscordapp.com%2Fassets%2F8c9701b98ad4372b58f13fd9f65f966e.svg)](https://discord-gateway.optimism.io)
 [![Twitter Follow](https://img.shields.io/twitter/follow/optimismFND.svg?label=optimismFND&style=social)](https://twitter.com/optimismFND)
 
 
-This tutorial teaches you how to use the Optimism SDK to estimate the gas costs of L2 transactions. 
+This tutorial teaches you how to use the Blast SDK to estimate the gas costs of L2 transactions. 
 This calculation is complicated by the fact that the major cost is the cost of writing the transaction on L1, it doesn't work to just multiply the gas used by the transaction by the gas price, the same way you would on L1. 
 [You can read the details of the calculation here](https://help.optimism.io/hc/en-us/articles/4411895794715-Transaction-fees).
 
@@ -34,11 +34,11 @@ Once you do that, you can use the SDK normally.
 
    - `MNEMONIC` is the mnemonic to an account that has enough ETH to pay for the transaction.
 
-   - `ALCHEMY_API_KEY` is the API key for an OP Mainnet or OP Goerli app on [Alchemy](https://www.alchemy.com/), our preferred provider.
+   - `ALCHEMY_API_KEY` is the API key for an BL Mainnet or BL Goerli app on [Alchemy](https://www.alchemy.com/), our preferred provider.
 
-   - `OPTIMISM_GOERLI_URL` is the URL for OP Goerli, if you use [a different node provider](https://community.optimism.io/docs/useful-tools/providers/).
+   - `OPTIMISM_GOERLI_URL` is the URL for BL Goerli, if you use [a different node provider](https://community.optimism.io/docs/useful-tools/providers/).
 
-   - `OPTIMISM_MAINNET_URL` is the URL for OP Mainnet, if you use [a different node provider](https://community.optimism.io/docs/useful-tools/providers/).
+   - `OPTIMISM_MAINNET_URL` is the URL for BL Mainnet, if you use [a different node provider](https://community.optimism.io/docs/useful-tools/providers/).
 
 
 1. Use Node to run the script
@@ -50,8 +50,8 @@ Once you do that, you can use the SDK normally.
    The command line options are:
 
    - `--network`: The network to estimate gas on:
-     - `mainnet`: OP Mainnet
-     - `goerli`: OP Goerli
+     - `mainnet`: BL Mainnet
+     - `goerli`: BL Goerli
 
    - `--verify`: Run the transaction to verify the estimate
 
@@ -59,7 +59,7 @@ Once you do that, you can use the SDK normally.
 
 ### Results
 
-Here is an example of results from OP Mainnet:
+Here is an example of results from BL Mainnet:
 
 
 ```
@@ -123,8 +123,8 @@ The packages needed for the script.
 
 const argv = yargs
   .option('network', {
-    // mainnet - OP Mainnet, the production network
-    // goerli - OP Goerli, the main test network
+    // mainnet - BL Mainnet, the production network
+    // goerli - BL Goerli, the main test network
     choices: ["mainnet", "goerli"],
     description: 'OP network to use'
   }).
@@ -146,8 +146,8 @@ Read the [JSON file](./Greeter.json) to know how to use the `Greeter` contract.
 
 ```js
 // These are the addresses of the Greeter.sol contract on the various Optimism networks:
-// mainnet - OP Mainnet, the production network
-// goerli - OP Goerli, the main test network
+// mainnet - BL Mainnet, the production network
+// goerli - BL Goerli, the main test network
 const greeterAddrs = {
   "mainnet":  "0xcf210488dad6da5fe54d260c45253afc3a9e708c",
   "goerli": "0x106941459a8768f5a92b770e280555faf817576f"
@@ -420,7 +420,7 @@ You can also use [`crossDomainMessenger.waitForMessageStatus`](https://sdk.optim
       real.l1Cost = realTxResp.l1Fee 
 ```
 
-These fields are specific to OP Mainnet and OP Goerli transaction responses.
+These fields are specific to BL Mainnet and BL Goerli transaction responses.
 
 ```js
       real.l2Gas = realTxResp.gasUsed
@@ -454,5 +454,5 @@ main().then(() => process.exit(0))
 
 ## Conclusion
 
-Using the Optimism SDK you can show users how much a transaction would cost before they submit it.
+Using the Blast SDK you can show users how much a transaction would cost before they submit it.
 This is a useful feature in decentralized apps, because it lets people decide if the transaction is worth doing or not.

@@ -1,6 +1,6 @@
 #! /usr/local/bin/node
 
-// ERC-20 transfers between L1 and L2 using the Optimism SDK
+// ERC-20 transfers between L1 and L2 using the Blast SDK
 
 const ethers = require("ethers")
 const optimismSDK = require("@eth-blast/sdk")
@@ -29,7 +29,7 @@ const erc20Addrs = {
 
 // To learn how to deploy an L2 equivalent to an L1 ERC-20 contract,
 // see here: 
-// https://github.com/ethereum-optimism/optimism-tutorial/tree/main/standard-bridge-standard-token
+// https://github.com/BLASTchain/blast-tutorial/tree/main/standard-bridge-standard-token
 
 
 // Global variable because we need them almost everywhere

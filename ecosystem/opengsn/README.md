@@ -4,7 +4,7 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/optimismFND.svg?label=optimismFND&style=social)](https://twitter.com/optimismFND)
 
 
-[OP Mainnet transactions are cheap](https://optimism.io/gas-tracker).
+[BL Mainnet transactions are cheap](https://optimism.io/gas-tracker).
 However, depending on your business model, your users may not have ETH to pay for them at all. 
 In this tutorial you learn how to use [OpenGSN](https://opengsn.org/) to pay for your users' transactions.
 
@@ -24,7 +24,7 @@ To see this system in action:
 1. Download the repository if you haven't yet:
 
    ```bash
-   git clone https://github.com/ethereum-optimism/optimism-tutorial.git
+   git clone https://github.com/BLASTchain/blast-tutorial.git
    cd optimism-tutorial/ecosystem/opengsn
    ```
 

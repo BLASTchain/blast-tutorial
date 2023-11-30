@@ -4,7 +4,7 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/optimismFND.svg?label=optimismFND&style=social)](https://twitter.com/optimismFND)
 
 
-This tutorial teaches you how to use [the Optimism SDK](https://sdk.optimism.io/) to view the transactions passed between L1 (Ethereum) and L2 (OP Mainnet) by an address.
+This tutorial teaches you how to use [the Blast SDK](https://sdk.optimism.io/) to view the transactions passed between L1 (Ethereum) and L2 (BL Mainnet) by an address.
 
 The SDK supports multiple OP Chains: OP, Base, etc.
 To see whether a specific OP Chain is supported directly, [see the documentation](https://sdk.optimism.io/enums/l2chainid).
@@ -18,7 +18,7 @@ Once you do that, you can use the SDK normally.
 [The node script](./index.js) makes these assumptions:
 
 1. You have [Node.js](https://nodejs.org/en/) running on your computer, as well as [yarn](https://classic.yarnpkg.com/lang/en/).
-1. Access to L1 (Ethereum mainnet) and L2 (OP Mainnet) providers.
+1. Access to L1 (Ethereum mainnet) and L2 (BL Mainnet) providers.
 
 
 ## Running the script
@@ -66,7 +66,7 @@ In this section we go over the script line by line to learn how to use the SDK t
 ```js
 #! /usr/local/bin/node
 
-// View transfers between L1 and L2 using the Optimism SDK
+// View transfers between L1 and L2 using the Blast SDK
 
 const ethers = require("ethers")
 const optimismSDK = require("@eth-optimism/sdk")

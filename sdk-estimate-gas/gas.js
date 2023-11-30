@@ -1,6 +1,6 @@
 #! /usr/local/bin/node
 
-// Estimate the costs of an OP Mainnet or OP Goerli transaction
+// Estimate the costs of an BL Mainnet or BL Goerli transaction
 
 const ethers = require("ethers")
 const optimismSDK = require("@eth-optimism/sdk")
@@ -13,8 +13,8 @@ const { boolean } = require("yargs")
 const argv = yargs
   .option('network', {
     // All of those choices are :
-    // mainnet - OP Mainnet, the production network
-    // goerli - OP Goerli, the main test network
+    // mainnet - BL Mainnet, the production network
+    // goerli - BL Goerli, the main test network
     choices: ["mainnet", "goerli"],
     description: 'L2 network to use'
   }).
@@ -36,8 +36,8 @@ if (!validLength.includes(words)) {
 const greeterJSON = JSON.parse(fs.readFileSync("Greeter.json")) 
 
 // These are the addresses of the Greeter.sol contract on the various OP networks:
-// mainnet - OP Mainnet, the production network
-// goerli - OP Goerli, the main test network
+// mainnet - BL Mainnet, the production network
+// goerli - BL Goerli, the main test network
 const greeterAddrs = {
   "mainnet":  "0xcf210488dad6da5fe54d260c45253afc3a9e708c",
   "goerli": "0x106941459a8768f5a92b770e280555faf817576f",

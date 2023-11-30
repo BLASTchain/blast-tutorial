@@ -1,9 +1,9 @@
-# Bridging ETH with the Optimism SDK
+# Bridging ETH with the Blast SDK
 
 [![Discord](https://img.shields.io/discord/667044843901681675.svg?color=768AD4&label=discord&logo=https%3A%2F%2Fdiscordapp.com%2Fassets%2F8c9701b98ad4372b58f13fd9f65f966e.svg)](https://discord-gateway.optimism.io)
 [![Twitter Follow](https://img.shields.io/twitter/follow/optimismFND.svg?label=optimismFND&style=social)](https://twitter.com/optimismFND)
 
-This tutorial teaches you how to use the [Optimism SDK](https://sdk.optimism.io/) to transfer ETH between Layer 1 (Ethereum or Goerli) and Layer 2 (OP Mainnet or OP Goerli).
+This tutorial teaches you how to use the [Blast SDK](https://sdk.optimism.io/) to transfer ETH between Layer 1 (Ethereum or Goerli) and Layer 2 (BL Mainnet or BL Goerli).
 
 The SDK supports multiple OP Chains: OP, Base, etc.
 To see whether a specific OP Chain is supported directly, [see the documentation](https://sdk.optimism.io/enums/l2chainid).
@@ -21,7 +21,7 @@ Once you do that, you can use the SDK normally.
 1. Clone this repository and enter it.
 
    ```sh
-   git clone https://github.com/ethereum-optimism/optimism-tutorial.git
+   git clone https://github.com/BLASTchain/blast-tutorial.git
    cd optimism-tutorial/cross-dom-bridge-eth
    ```
 
@@ -34,17 +34,17 @@ Once you do that, you can use the SDK normally.
 1. Go to [Alchemy](https://www.alchemy.com/) and create two applications:
 
    - An application on Goerli
-   - An application on OP Goerli
+   - An application on BL Goerli
 
    Keep a copy of the two keys.
 
 1. Copy `.env.example` to `.env` and edit it:
 
-   1. Set `MNEMONIC` to point to an account that has ETH on the Goerli test network and the OP Goerli test network.
+   1. Set `MNEMONIC` to point to an account that has ETH on the Goerli test network and the BL Goerli test network.
    1. Set `GOERLI_ALCHEMY_KEY` to the key for the Goerli app.
-   1. Set `OP_GOERLI_ALCHEMY_KEY` to the key for the OP Goerli app
+   1. Set `OP_GOERLI_ALCHEMY_KEY` to the key for the BL Goerli app
 
-   [This faucet gives ETH on the Goerli network](https://faucet.paradigm.xyz/). [This faucet gives ETH on the OP Goerli network](https://optimismfaucet.xyz/).
+   [This faucet gives ETH on the Goerli network](https://faucet.paradigm.xyz/). [This faucet gives ETH on the BL Goerli network](https://optimismfaucet.xyz/).
 
 
 ## Run the sample code
@@ -92,7 +92,7 @@ withdrawETH took 359.783 seconds
 ```js
 #! /usr/local/bin/node
 
-// Transfers between L1 and L2 using the Optimism SDK
+// Transfers between L1 and L2 using the Blast SDK
 
 const ethers = require("ethers")
 const optimismSDK = require("@eth-optimism/sdk")
@@ -100,7 +100,7 @@ require('dotenv').config()
 
 ```
 
-The libraries we need: [`ethers`](https://docs.ethers.io/v5/), [`dotenv`](https://www.npmjs.com/package/dotenv) and the Optimism SDK itself.
+The libraries we need: [`ethers`](https://docs.ethers.io/v5/), [`dotenv`](https://www.npmjs.com/package/dotenv) and the Blast SDK itself.
 
 ```js
 const mnemonic = process.env.MNEMONIC
@@ -205,7 +205,7 @@ const reportBalances = async () => {
 
 ### `depositETH`
 
-This function shows how to deposit ETH from Ethereum to OP Mainnet (or Goerli to OP Goerli).
+This function shows how to deposit ETH from Ethereum to BL Mainnet (or Goerli to BL Goerli).
 
 ```js
 const depositETH = async () => {
@@ -253,12 +253,12 @@ The third parameter (which is optional) is a hashed array of options:
 }     // depositETH()
 ```
 
-Once the message is relayed the balance change on OP Mainnet (or OP Goerli) is practically instantaneous.
+Once the message is relayed the balance change on BL Mainnet (or BL Goerli) is practically instantaneous.
 We can just report the balances and see that the L2 balance rose by 1 gwei.
 
 ### `withdrawETH`
 
-This function shows how to withdraw ETH from OP Mainnet to Ethereum (or OP Goerli to Goerli).
+This function shows how to withdraw ETH from BL Mainnet to Ethereum (or BL Goerli to Goerli).
 
 ```js
 const withdrawETH = async () => { 
@@ -281,7 +281,7 @@ By sending 0.01 ETH it is guaranteed that the withdrawal will actually increase 
   await response.wait()
 ```
 
-This is the initial withdrawal transaction on OP Goerli (it would look the same on OP Mainnet).
+This is the initial withdrawal transaction on BL Goerli (it would look the same on BL Mainnet).
 
 ```js
   console.log("Waiting for status to be READY_TO_PROVE")
